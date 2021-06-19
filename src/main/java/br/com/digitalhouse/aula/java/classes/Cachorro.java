@@ -5,13 +5,14 @@ import br.com.digitalhouse.aula.java.interfaces.Animal;
 import java.util.Objects;
 
 public class Cachorro extends Animal {
-    String raca;
-    String cor;
-    String tamanho;
-    Integer idade;
-    String tipoPelagem;
-    Double peso;
-    String nome;
+    private String raca;
+    private String cor;
+    private String tamanho;
+    private Integer idade;
+    private String tipoPelagem;
+    private Double peso;
+    private String nome;
+    private String pedrigree;
 
     @Override
     public String toString() {
@@ -60,6 +61,12 @@ public class Cachorro extends Animal {
         }
 
         return morde;
+    }
+
+    private void setPedrigree(){
+        if (this.tipoPelagem.equals("Curta") && this.idade < 20){
+            this.pedrigree = "Bom";
+        }
     }
 
     public boolean brincar(){

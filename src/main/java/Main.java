@@ -1,9 +1,6 @@
-import br.com.digitalhouse.aula.java.classes.Cachorro;
-import br.com.digitalhouse.aula.java.classes.CachorroCaramelo;
-import br.com.digitalhouse.aula.java.classes.CachorroGourmet;
-import br.com.digitalhouse.aula.java.classes.Usuario;
+import br.com.digitalhouse.aula.java.classes.*;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
@@ -73,7 +70,7 @@ public class Main{
         cachorro1.setTamanho("100");
         cachorro1.setTipoPelagem("Curta");
 
-        System.out.println(cachorro1.toString());
+        //System.out.println(cachorro1.toString());
         if (cachorro1.brincar()){
             System.out.println("Cachorro gente boa");
         }
@@ -93,7 +90,6 @@ public class Main{
             System.out.println("Cachorro gente boa");
         }
         System.out.println(cachorro2.correr());
-
 
         System.out.println("Igual?: " + cachorro1.equals(cachorro2));
 
@@ -118,15 +114,79 @@ public class Main{
         caramelo.setTamanho("4");
         caramelo.setTipoPelagem("Media");
         System.out.println(caramelo.correr());
-        System.out.println(caramelo.toString());
+       // System.out.println(caramelo.toString());
 
-        String assunto = "";
+        List<Cachorro> listaCachorro = new ArrayList<>();
+        listaCachorro.add(cachorro1);
+        listaCachorro.add(cachorro2);
+
+        listaCachorro.remove(cachorro2);
+        listaCachorro.add(caramelo);
+        listaCachorro.add(nutelinha);
+
+        listaCachorro.add(cachorro2);
+        listaCachorro.add(cachorro1);
+        for (Cachorro printaCachorro : listaCachorro){
+            System.out.println("Posicao: " + printaCachorro);
+        }
+
+        Set<Cachorro> conjuntoCachorro = new HashSet<>();
+        conjuntoCachorro.add(cachorro1);
+        conjuntoCachorro.add(caramelo);
+        conjuntoCachorro.add(nutelinha);
+        conjuntoCachorro.add(cachorro1);
+
+        conjuntoCachorro.remove(caramelo);
+
+        if (conjuntoCachorro.contains(cachorro1)){
+            System.out.println("Sim ele ta aqui!");
+        }
+
+        for (Cachorro cjCachorro : conjuntoCachorro){
+            System.out.println("Conjunto: " + cjCachorro);
+        }
+
+        // Lista Estoque - Class Estoque
+       Estoque estoque = new Estoque();
+
+        // Criacao Produtos
+        Produto produto = new Produto();
+        produto.setId(1);
+        produto.setDescricao("Iphone XR");
+        produto.setQuantidade(5);
+        estoque.adicionarEstoque(produto.getId(), produto);
+
+        Produto produto1 = new Produto();
+        produto1.setId(2);
+        produto1.setDescricao("Livro Harry Potter");
+        produto1.setQuantidade(2);
+        estoque.adicionarEstoque(produto.getId(), produto1);
+
+        // Valida se ja existe no estoque
+        try{
+            Produto buscaPrd = estoque.buscaProduto(10);
+            if (buscaPrd != null){
+                System.out.println("Produto ja existe");
+            }
+        }catch (estoqueProdutoNaoEncontradoException e){
+            System.out.println("Produto Nao Encontrado");
+        }
+
+
+        HashMap<Integer,Produto> lista = (HashMap<Integer, Produto>) estoque.getEstoque();
+        for (Integer idPrd : lista.keySet()){
+            Produto prd = lista.get(idPrd);
+            System.out.println(prd);
+        }
+
+
+
+        /*String assunto = "";
         String email = "";
 
         Usuario.enviarEmail(email, assunto);
 
         Usuario user = new Usuario();
-        System.out.println(user.toString());
-
+        System.out.println(user.toString());*/
     }
 }
